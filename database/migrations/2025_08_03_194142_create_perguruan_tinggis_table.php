@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('perguruan_tinggis', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->string('kode')->unique();
+            $table->enum('jenis', ['universitas', 'institut', 'sekolah_tinggi', 'politeknik', 'akademi']);
+            $table->text('alamat');
+            $table->string('status_akreditasi')->nullable();
+            $table->string('rektor');
+            $table->string('telepon')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }

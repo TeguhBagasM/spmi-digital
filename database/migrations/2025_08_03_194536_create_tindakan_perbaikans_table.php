@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('tindakan_perbaikans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('temuan_audit_id')->constrained('temuan_audits');
+            $table->text('rencana_tindakan');
+            $table->text('analisis_akar_masalah');
+            $table->foreignId('penanggung_jawab_id')->constrained('penggunas');
+            $table->date('tanggal_target');
+            $table->date('tanggal_selesai_aktual')->nullable();
+            $table->text('bukti_penyelesaian')->nullable();
+            $table->text('catatan')->nullable();
+            $table->enum('status', ['direncanakan', 'proses', 'selesai', 'diverifikasi', 'ditolak']);
             $table->timestamps();
         });
     }

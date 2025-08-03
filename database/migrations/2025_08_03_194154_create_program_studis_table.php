@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('program_studis', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('perguruan_tinggi_id')->constrained('perguruan_tinggis');
+            $table->string('nama');
+            $table->string('kode')->unique();
+            $table->enum('jenjang', ['diploma', 'sarjana', 'magister', 'doktor']);
+            $table->string('kaprodi');
+            $table->string('status_akreditasi')->nullable();
+            $table->date('tanggal_akreditasi')->nullable();
+            $table->integer('jumlah_mahasiswa')->default(0);
             $table->timestamps();
         });
     }

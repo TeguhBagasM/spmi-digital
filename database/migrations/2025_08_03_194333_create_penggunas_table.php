@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('penggunas', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->string('email')->unique();
+            $table->string('nip')->unique()->nullable();
+            $table->string('jabatan');
+            $table->enum('peran', ['admin', 'pimpinan', 'auditor', 'kaprodi', 'staff']);
+            $table->foreignId('program_studi_id')->nullable()->constrained('program_studis');
+            $table->string('password');
             $table->timestamps();
         });
     }

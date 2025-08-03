@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('laporan_berkalas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('perguruan_tinggi_id')->constrained('perguruan_tinggi');
+            $table->foreignId('perguruan_tinggi_id')->constrained('perguruan_tinggis');
             $table->string('judul_laporan');
             $table->enum('jenis_laporan', ['bulanan', 'semesteran', 'tahunan', 'khusus']);
             $table->enum('periode', ['ganjil', 'genap', 'tahunan']);

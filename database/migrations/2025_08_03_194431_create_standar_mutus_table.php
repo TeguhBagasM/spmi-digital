@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('standar_mutus', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('perguruan_tinggi_id')->constrained('perguruan_tinggis');
+            $table->string('kode_standar');
+            $table->string('nama_standar');
+            $table->text('deskripsi');
+            $table->enum('kategori', ['pendidikan', 'penelitian', 'pengabdian', 'tata_kelola']);
+            $table->json('indikator_kinerja'); // Array indikator dalam JSON
+            $table->enum('status', ['draft', 'aktif', 'revisi', 'non_aktif']);
+            $table->date('tanggal_berlaku');
             $table->timestamps();
         });
     }

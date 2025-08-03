@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('tim_auditors', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('rencana_audit_id')->constrained('rencana_audits');
+            $table->foreignId('auditor_id')->constrained('penggunas');
+            $table->enum('peran_audit', ['ketua', 'anggota', 'observer']);
+            $table->json('area_audit'); // Area yang menjadi tanggung jawab
             $table->timestamps();
         });
     }
