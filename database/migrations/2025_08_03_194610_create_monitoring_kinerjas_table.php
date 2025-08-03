@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('monitoring_kinerjas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('program_studi_id')->constrained('program_studi');
+            $table->foreignId('target_kinerja_id')->constrained('target_kinerja');
+            $table->decimal('nilai_aktual', 8, 2);
+            $table->date('tanggal_pengukuran');
+            $table->enum('semester', ['ganjil', 'genap']);
+            $table->year('tahun_akademik');
+            $table->text('analisis')->nullable();
+            $table->enum('status_pencapaian', ['tercapai', 'tidak_tercapai', 'melampaui']);
+            $table->text('rencana_tindak_lanjut')->nullable();
             $table->timestamps();
         });
     }
