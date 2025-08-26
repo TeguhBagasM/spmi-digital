@@ -21,7 +21,7 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
+
     // Master Data
     Route::prefix('master')->name('master.')->group(function () {
         Route::resource('perguruan-tinggi', PerguruanTinggiController::class);
@@ -29,15 +29,19 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('pengguna', PenggunaController::class);
         Route::resource('standar-mutu', StandarMutuController::class);
     });
-    
+
     // Audit Management
     Route::prefix('audit')->name('audit.')->group(function () {
         Route::resource('rencana-audit', RencanaAuditController::class);
         Route::resource('temuan-audit', TemuanAuditController::class);
         Route::resource('tindakan-perbaikan', TindakanPerbaikanController::class);
-        
+
+        // Additional audit routes
+        Route::get('rencana-audit/{rencanaAudit}/tim-auditor', [RencanaAuditController::class, 'timAuditor'])->name('rencana-audit.tim-auditor');
+        Route::post('rencana-audit/{rencanaAudit}/assign-auditor', [RencanaAuditController::class, 'assignAuditor'])->name('rencana-audit.assign-auditor');
+        Route::patch('temuan-audit/{temuanAudit}/status', [TemuanAuditController::class, 'updateStatus'])->name('temuan-audit.update-status');
     });
-    
+
     // Quality Monitoring
     Route::prefix('monitoring')->name('monitoring.')->group(function () {
         Route::get('/', [MonitoringKinerjaController::class, 'index'])->name('kinerja.index');
@@ -47,7 +51,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/target', [TargetKinerjaController::class, 'index'])->name('target.index');
         Route::resource('target-kinerja', TargetKinerjaController::class);
     });
-    
+
     // Reports
     Route::prefix('laporan')->name('laporan.')->group(function () {
         Route::get('/', [LaporanController::class, 'index'])->name('index');
