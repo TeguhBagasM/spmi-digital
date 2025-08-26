@@ -36,10 +36,6 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('temuan-audit', TemuanAuditController::class);
         Route::resource('tindakan-perbaikan', TindakanPerbaikanController::class);
         
-        // Additional audit routes
-        Route::get('rencana-audit/{rencanaAudit}/tim-auditor', [RencanaAuditController::class, 'timAuditor'])->name('rencana-audit.tim-auditor');
-        Route::post('rencana-audit/{rencanaAudit}/assign-auditor', [RencanaAuditController::class, 'assignAuditor'])->name('rencana-audit.assign-auditor');
-        Route::patch('temuan-audit/{temuanAudit}/status', [TemuanAuditController::class, 'updateStatus'])->name('temuan-audit.update-status');
     });
     
     // Quality Monitoring
